@@ -1,0 +1,21 @@
+---
+version: "3.8"
+services:
+
+  #----------------------------------------------
+  # Mosquitto - https://hub.docker.com/_/eclipse-mosquitto 
+  # For password see: https://mosquitto.org/man/mosquitto_passwd-1.html
+  #----------------------------------------------
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    volumes:
+      - ${storage_volume}/mosquitto:/mosquitto
+      - ${storage_volume}/mosquitto/data:/mosquitto/data
+      - ${storage_volume}/mosquitto/log:/mosquitto/log
+    ports:
+      - 1883:1883
+      - 8883:8883
+      - 9001:9001
+    network_mode: host
+    restart: unless-stopped
